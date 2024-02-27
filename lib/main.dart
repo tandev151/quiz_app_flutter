@@ -29,6 +29,16 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeepers = [];
 
+  void checkAnswer(bool yourChoice) {
+    Icon icon = Icon(Icons.close);
+
+    if (brain.getAnswer() == yourChoice) {
+      icon = Icon(Icons.check);
+    }
+
+    scoreKeepers.add(icon);
+  }
+
   Brain brain = new Brain();
   @override
   Widget build(BuildContext context) {
@@ -54,9 +64,9 @@ class _QuizPageState extends State<QuizPage> {
                     color: Colors.white),
               ),
               onPressed: () {
-                print('Clicked!');
                 setState(() {
                   brain.getNextQuestion();
+                  checkAnswer(true);
                 });
               },
               color: Colors.green[400],
@@ -66,9 +76,9 @@ class _QuizPageState extends State<QuizPage> {
             child: MaterialButton(
               minWidth: double.infinity,
               onPressed: () {
-                print('Clicked!');
                 setState(() {
                   brain.getNextQuestion();
+                  checkAnswer(false);
                 });
               },
               child: Text(
