@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app_flutter/brain.dart';
 
 void main() {
   runApp(const MainApp());
@@ -27,16 +28,8 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeepers = [];
-  // List<Map<String, String>> questions = [
-  //   {'What?': 'True'},
-  //   {'question': 'Where?', 'anwser': 'True'},
-  //   {'question': 'What?', 'anwser': 'True'},
-  //   {'question': 'What?', 'anwser': 'True'},
-  //   {'question': 'What?', 'anwser': 'True'},
-  //   {'question': 'What?', 'anwser': 'True'},
-  // ];
 
-  List<String> questions = ['What', 'Where'];
+  Brain brain = new Brain();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,7 +38,7 @@ class _QuizPageState extends State<QuizPage> {
             flex: 5,
             child: Center(
               child: Text(
-                questions[0],
+                brain.getQuestion(),
                 style: TextStyle(),
               ),
             )),
@@ -63,7 +56,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 print('Clicked!');
                 setState(() {
-                  scoreKeepers.add(Icon(Icons.check));
+                  brain.getNextQuestion();
                 });
               },
               color: Colors.green[400],
@@ -75,7 +68,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 print('Clicked!');
                 setState(() {
-                  scoreKeepers.add(Icon(Icons.close));
+                  brain.getNextQuestion();
                 });
               },
               child: Text(
