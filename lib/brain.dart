@@ -12,6 +12,10 @@ class Brain {
     Question(question: 'Do you free at 7AM?', answer: false),
   ];
 
+  bool isFinished() {
+    return questionNumber >= questionList.length - 1;
+  }
+
   void getNextQuestion() {
     if (questionNumber < questionList.length - 1) {
       questionNumber++;
